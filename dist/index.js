@@ -3,6 +3,10 @@ exports.__esModule = true;
 var electron_1 = require("electron");
 var path = require("path");
 var aboutWindow;
+var cronWindow;
+var timerWindow;
+// Used to show about window
+// About window contains informations from app and the creator
 function showAboutWindow() {
     if (aboutWindow != undefined) {
         aboutWindow.focus();
@@ -10,10 +14,7 @@ function showAboutWindow() {
     else {
         aboutWindow = new electron_1.BrowserWindow({
             width: 400,
-            height: 400,
-            webPreferences: {
-                preload: path.join(__dirname, "aboutPreload.js")
-            }
+            height: 400
         });
         aboutWindow.setTitle("About");
         aboutWindow.setMenuBarVisibility(false);
@@ -21,11 +22,37 @@ function showAboutWindow() {
         aboutWindow.on("closed", function () { aboutWindow = undefined; });
     }
 }
+// Used to show window of cronometer
 function showCronometerWindow() {
-    console.log("Cronometer");
+    if (cronWindow != undefined) {
+        cronWindow.focus();
+    }
+    else {
+        cronWindow = new electron_1.BrowserWindow({
+            width: 400,
+            height: 400
+        });
+        cronWindow.setTitle("Cronometer");
+        cronWindow.setMenuBarVisibility(false);
+        cronWindow.loadFile(path.join(__dirname, "Cron.html"));
+        cronWindow.on("closed", function () { cronWindow = undefined; });
+    }
 }
+// Used to show window of cronometer
 function showTimerWindow() {
-    console.log("Timer");
+    if (timerWindow != undefined) {
+        timerWindow.focus();
+    }
+    else {
+        timerWindow = new electron_1.BrowserWindow({
+            width: 400,
+            height: 400
+        });
+        timerWindow.setTitle("Timer");
+        timerWindow.setMenuBarVisibility(false);
+        timerWindow.loadFile(path.join(__dirname, "Timer.html"));
+        timerWindow.on("closed", function () { timerWindow = undefined; });
+    }
 }
 // Create app Tray
 function applyTray() {
@@ -42,12 +69,11 @@ function applyTray() {
 }
 // App ready
 function appReady() {
-    showAboutWindow();
+    // showAboutWindow();
+    // showCronometerWindow();
+    showTimerWindow();
     applyTray();
 }
-// App activate
-// function appActivate(): void {
-// }
 // App listen events
 electron_1.app.on("ready", appReady);
 electron_1.app.on("window-all-closed", function () { return console.log("App windows closed."); });

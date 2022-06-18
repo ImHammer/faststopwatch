@@ -1,0 +1,20 @@
+
+html, body {
+    height: 100%;
+}
+
+#countView {
+    font-size: 33px;
+}
+/* 
+@media (prefers-color-scheme: dark) {
+    #lightColors {
+        display: none;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #darkColors {
+        display: none;
+    }
+} */

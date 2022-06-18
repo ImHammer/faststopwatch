@@ -1,0 +1,13 @@
+
+html, body {
+    height: 100%;
+}
+
+#hou_text, #min_text, #sec_text {
+    font-size: 36px;
+}
+
+#mse_text {
+    font-size: 20px;
+    padding-bottom: .35rem;
+}

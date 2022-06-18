@@ -3,34 +3,56 @@ import { app, BrowserWindow, ipcMain, nativeTheme, shell, Tray, nativeImage, Men
 import * as path from "path";
 
 let aboutWindow: BrowserWindow;
+let cronWindow: BrowserWindow;
+let timerWindow: BrowserWindow;
 
+// Used to show about window
+// About window contains informations from app and the creator
 function showAboutWindow(): void {
     if (aboutWindow != undefined) {
         aboutWindow.focus();
     } else {
         aboutWindow = new BrowserWindow({
             width: 400,
-            height: 400,
-            webPreferences: {
-                preload: path.join(__dirname, "aboutPreload.js")
-            }
+            height: 400
         });
-
         aboutWindow.setTitle("About");
         aboutWindow.setMenuBarVisibility(false);
-
         aboutWindow.loadFile(path.join(__dirname, "About.html"));
-
         aboutWindow.on("closed", () => { aboutWindow = undefined; });
     }
 }
 
+// Used to show window of cronometer
 function showCronometerWindow(): void {
-    console.log("Cronometer");
+    if (cronWindow != undefined) {
+        cronWindow.focus();
+    } else {
+        cronWindow = new BrowserWindow({
+            width: 400,
+            height: 400
+        });
+        cronWindow.setTitle("Cronometer");
+        cronWindow.setMenuBarVisibility(false);
+        cronWindow.loadFile(path.join(__dirname, "Cron.html"));
+        cronWindow.on("closed", () => { cronWindow = undefined; });
+    }
 }
 
+// Used to show window of cronometer
 function showTimerWindow(): void {
-    console.log("Timer");
+    if (timerWindow != undefined) {
+        timerWindow.focus();
+    } else {
+        timerWindow = new BrowserWindow({
+            width: 400,
+            height: 400
+        });
+        timerWindow.setTitle("Timer");
+        timerWindow.setMenuBarVisibility(false);
+        timerWindow.loadFile(path.join(__dirname, "Timer.html"));
+        timerWindow.on("closed", () => { timerWindow = undefined; });
+    }
 }
 
 // Create app Tray
@@ -50,14 +72,11 @@ function applyTray(): void {
 
 // App ready
 function appReady(): void {
-    showAboutWindow();
+    // showAboutWindow();
+    // showCronometerWindow();
+    showTimerWindow();
     applyTray();
 }
-
-// App activate
-// function appActivate(): void {
-
-// }
 
 // App listen events
 app.on("ready", appReady);
